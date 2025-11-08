@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "id": 100, "username": "alice", "full_name": "Alice Pérez", "role": "apprentice", "password": "alice123", "qr_payload": "{\"type\":\"user\",\"username\":\"alice\"}" },
+    { "id": 101, "username": "bob", "full_name": "Bob Gómez", "role": "guest", "password": "bob123", "qr_payload": "{\"type\":\"user\",\"username\":\"bob\"}" }
+  ],
+  "visits": []
+}
