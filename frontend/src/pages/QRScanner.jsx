@@ -1,30 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-export default function QRScanner(){
-  const [scanning, setScanning] = useState(false)
-  const [msg, setMsg] = useState('')
-
-  const fakeScan = () => {
-    setMsg('QR leído: {"type":"user","username":"alice"} (simulado)')
-  }
-
+export default function QRScanner() {
   return (
-    <div>
-      <h3>Lectura QR</h3>
-      <div className="card">
-        <div style={{ width: '100%', minHeight: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', borderRadius: 8 }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ width: 220, height: 220, background: '#fff', borderRadius: 8, display: 'inline-block', boxShadow: '0 1px 6px rgba(0,0,0,0.06)', marginBottom: 12 }}>
-              {/* Placeholder for camera view */}
-            </div>
-            <div className="muted">Área del escáner (placeholder)</div>
+    <div className="scanner-wrapper">
+      <div className="scanner-section">
+        <h2>Escanear Código QR</h2>
+        <p className="muted-text">Escanee el código QR del estudiante o invitado</p>
+
+        <div className="camera-box">
+          <div className="camera-placeholder">📸 Cámara QR (Simulada)</div>
+        </div>
+
+        <div className="manual-entry">
+          <input type="text" placeholder="Código QR" />
+          <button className="btn-primary">Verificar</button>
+        </div>
+
+        <p className="muted-text">Para probar el escáner, copia y pega el código QR desde:</p>
+        <ul className="muted-list">
+          <li>Un registro de estudiante creado</li>
+          <li>Un pase de invitado generado</li>
+          <li>El resultado de una carga masiva</li>
+        </ul>
+      </div>
+
+      <div className="result-section">
+        <h2>Resultado del Escaneo</h2>
+        <div className="result-box">
+          <div className="result-placeholder">
+            <p>No hay escaneos recientes</p>
+            <p className="muted-text">Escanee un código QR para ver la información</p>
           </div>
         </div>
-        <div style={{ marginTop: 12 }}>
-          <button className="btn-primary" onClick={() => { setScanning(s => !s); setMsg('Escáner ' + (scanning ? 'detenido (simulado)' : 'activo (simulado)')) }}>{scanning ? 'Detener' : 'Iniciar escáner'}</button>
-          <button className="btn-sm" style={{ marginLeft: 8 }} onClick={fakeScan}>Simular lectura</button>
-        </div>
-        <div style={{ marginTop: 8 }}>{msg}</div>
       </div>
     </div>
   )

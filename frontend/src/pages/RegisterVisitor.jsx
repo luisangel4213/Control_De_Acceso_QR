@@ -1,28 +1,95 @@
 import React, { useState } from 'react'
 
-export default function RegisterVisitor(){
-  const [form, setForm] = useState({ username: '', full_name: '', note: '' })
-  const [ok, setOk] = useState(null)
+export default function RegisterVisitor() {
+  const [form, setForm] = useState({
+    tipoIdentidad: 'Cédula de Ciudadanía',
+    documento: '',
+    nombre: '',
+    apellido: '',
+    destino: ''
+  })
 
-  const submit = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault()
-    // purely visual: show success message
-    setOk('Visitante registrado (simulado)')
-    setForm({ username: '', full_name: '', note: '' })
+    alert('Invitado registrado y código QR generado (simulado)')
   }
 
   return (
-    <div>
-      <h3>Registrar visitante</h3>
-      <form className="card" onSubmit={submit}>
-        <label>Documento / Código</label>
-        <input value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} />
-        <label>Nombre completo</label>
-        <input value={form.full_name} onChange={e => setForm({ ...form, full_name: e.target.value })} />
-        <label>Nota</label>
-        <input value={form.note} onChange={e => setForm({ ...form, note: e.target.value })} />
-        <button className="btn-primary" type="submit">Registrar</button>
-        {ok && <div className="muted">{ok}</div>}
+    <div className="register-wrapper">
+      <h2>Registro de Invitados</h2>
+      <p className="muted-text">Registra un invitado y genera un código QR temporal válido por 2 horas</p>
+
+      <div className="info-box">
+        <p>
+          <strong>ℹ️ El código QR generado será válido por 2 horas</strong><br />
+          desde el momento de creación. Se enviarán alertas cuando el tiempo esté por expirar.
+        </p>
+      </div>
+
+      <form className="register-form" onSubmit={handleSubmit}>
+        <div className="form-row">
+          <div className="form-group">
+            <label>Tipo de Identidad *</label>
+            <select name="tipoIdentidad" value={form.tipoIdentidad} onChange={handleChange}>
+              <option>Cédula de Ciudadanía</option>
+              <option>Tarjeta de Identidad</option>
+              <option>Cédula de Extranjería</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Número de Documento *</label>
+            <input
+              name="documento"
+              type="text"
+              placeholder="Ej: 1234567890"
+              value={form.documento}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group">
+            <label>Nombre *</label>
+            <input
+              name="nombre"
+              placeholder="Nombre del invitado"
+              value={form.nombre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Apellido *</label>
+            <input
+              name="apellido"
+              placeholder="Apellido del invitado"
+              value={form.apellido}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label>¿Hacia dónde se dirige? *</label>
+          <input
+            name="destino"
+            placeholder="Ej: Salón 201, Oficina de Dirección, Biblioteca"
+            value={form.destino}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button className="btn-primary" type="submit">🧾 Registrar Invitado y Generar QR</button>
       </form>
     </div>
   )

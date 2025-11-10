@@ -1,46 +1,275 @@
-:root{
-  --bg:#f5f7fb;
-  --surface:#ffffff;
-  --primary:#0b63d6;
-  --muted:#6b7280;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;padding:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:#111;
-}
-
-.app-root{display:flex;min-height:100vh}
-.sidebar{width:220px;background:var(--surface);padding:20px;border-right:1px solid #eee;display:flex;flex-direction:column}
-.sidebar .logo{font-weight:700;color:var(--primary);margin-bottom:12px}
-.sidebar nav{display:flex;flex-direction:column;gap:8px}
-.sidebar a{color:#111;text-decoration:none;padding:8px;border-radius:6px}
-.sidebar a:hover{background:#f1f5f9}
-.main{flex:1;display:flex;flex-direction:column}
-.header{padding:16px;border-bottom:1px solid #eee}
-.content{padding:20px}
-.card{background:var(--surface);padding:16px;border-radius:8px;box-shadow:0 1px 4px rgba(12,14,18,0.04)}
-.card.small{display:inline-block;width:200px;margin-right:12px}
-.cards{display:flex;gap:12px}
-
-.auth-page{display:flex;align-items:center;justify-content:center;height:100vh}
-.auth-card{width:360px;padding:24px}
-label{display:block;font-size:14px;margin-top:8px;color:var(--muted)}
-input{width:100%;padding:8px;margin-top:6px;border:1px solid #e5e7eb;border-radius:6px}
-.btn-primary{background:var(--primary);color:#fff;padding:8px 12px;border-radius:6px;border:none;margin-top:12px}
-.btn-ghost{background:transparent;border:1px solid #e6e9ee;padding:8px;margin-top:auto}
-.btn-sm{padding:6px 8px;margin-right:6px}
-.btn-danger{background:#ef4444;color:#fff;border:none}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:8px;border-bottom:1px solid #f3f4f6;text-align:left}
-.alert{background:#fee2e2;color:#991b1b;padding:8px;border-radius:6px}
-.muted{color:var(--muted);margin-top:8px}
-
-@media (max-width:800px){
-  .sidebar{display:none}
-  .app-root{flex-direction:column}
+/* ==================== ESTILO GUARDIA ==================== */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f9fafb;
+  color: #111;
+  font-family: 'Inter', sans-serif;
 }
 
-/* small polish for forms and buttons */
-.card form { display:flex; flex-direction:column }
-.card form input, .card form select, .card form textarea { margin-bottom:10px }
+.layout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 24px;
+}
 
+.app-title {
+  display: flex;
+  flex-direction: column;
+}
+.role-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.nav-tabs a {
+  margin: 0 8px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #111;
+  font-weight: 500;
+}
+.nav-tabs a:hover {
+  background: #f3f4f6;
+}
+.active-tab {
+  background: #0b63d6;
+  color: #fff !important;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+/* ==== CONTENIDO PRINCIPAL ==== */
+.layout-content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ==== ESCÁNER ==== */
+.scanner-wrapper {
+  display: flex;
+  gap: 32px;
+}
+
+.scanner-section,
+.result-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.camera-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b0b2c;
+  height: 320px;
+  border-radius: 12px;
+  color: white;
+  margin: 16px 0;
+}
+
+.manual-entry {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.manual-entry input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.result-box {
+  background: #f9fafb;
+  height: 320px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.muted-text {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.muted-list {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+/* ==== REGISTRO DE INVITADOS ==== */
+.register-wrapper {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+}
+
+.info-box {
+  background: #f3f4f6;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+  color: #374151;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  background: #0b0b2c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #111133;
+}
+
+
+/* ==================== ESTILOS LOGIN ==================== */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #eef3ff; /* Fondo azul claro */
+}
+
+.login-card {
+  background: white;
+  padding: 40px 48px;
+  border-radius: 16px;
+  box-shadow: 0px 6px 24px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+}
+
+.login-logo h2 {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.logo-circle {
+  background-color: #3f3ff4;
+  color: white;
+  font-size: 32px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.muted-text {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.login-form {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.login-form label {
+  font-size: 14px;
+  color: #374151;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.btn-login {
+  background-color: #0b0b2c;
+  color: white;
+  font-size: 15px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.btn-login:hover {
+  background-color: #111133;
+}
+
+.login-info {
+  margin-top: 24px;
+  font-size: 14px;
+  text-align: left;
+  color: #111;
+}
+
+.login-info ul {
+  padding-left: 18px;
+  margin-top: 6px;
+}
+
+.login-msg {
+  margin-top: 10px;
+  color: #2563eb;
+  font-size: 14px;
+}

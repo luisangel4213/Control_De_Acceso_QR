@@ -11,14 +11,24 @@ import Layout from './components/Layout'
 export default function App() {
   return (
     <Routes>
+      {/* Página de inicio de sesión */}
       <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Layout />}>
+
+      {/* Panel del Administrador */}
+      <Route path="/admin" element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="users" element={<Users />} />
-        <Route path="scanner" element={<QRScanner />} />
-        <Route path="register" element={<RegisterVisitor />} />
         <Route path="reports" element={<Reports />} />
       </Route>
+
+      {/* Panel del Guarda */}
+      <Route path="/guarda" element={<Layout />}>
+        <Route index element={<QRScanner />} />
+        <Route path="register" element={<RegisterVisitor />} />
+      </Route>
+
+      {/* Redirección por defecto */}
+      <Route path="*" element={<Login />} />
     </Routes>
   )
 }

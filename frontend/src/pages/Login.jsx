@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// Static login: accepts any input and navigates to dashboard.
-// Demo credentials (shown below) can be used for visual testing:
-// - admin / admin123
-// - guard / guard123
-
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -14,22 +9,66 @@ export default function Login() {
 
   const submit = (e) => {
     e.preventDefault()
-    setMsg('Sesión iniciada (modo estático)')
-    setTimeout(() => navigate('/'), 600)
+
+    // Simulación de autenticación básica
+    if (username === 'Administrador' && password === '123456') {
+      localStorage.setItem('rol', 'Administrador')
+      setMsg('Inicio de sesión exitoso (Administrador)')
+      setTimeout(() => navigate('/admin'), 800)
+    } else if (username === 'Guarda' && password === '123456') {
+      localStorage.setItem('rol', 'Guarda')
+      setMsg('Inicio de sesión exitoso (Guarda)')
+      setTimeout(() => navigate('/guarda'), 800)
+    } else {
+      setMsg('❌ Credenciales incorrectas')
+    }
   }
 
   return (
-    <div className="auth-page">
-      <form className="card auth-card" onSubmit={submit}>
-        <h3>Iniciar sesión</h3>
-        <div style={{ fontSize: 13, marginBottom: 8 }}>Credenciales demo: <strong>admin/admin123</strong> o <strong>guard/guard123</strong></div>
-        <label>Usuario</label>
-        <input value={username} onChange={e => setUsername(e.target.value)} placeholder="usuario" />
-        <label>Contraseña</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="contraseña" />
-        <button className="btn-primary" type="submit">Entrar</button>
-        {msg && <div className="muted">{msg}</div>}
-      </form>
+    <div className="login-page">
+      <div className="login-card">
+        <div className="login-logo">
+          <div className="logo-circle">🔳</div>
+          <h2>Control de Acceso QR</h2>
+          <p className="muted-text">
+            Ingresa tus credenciales para acceder al sistema
+          </p>
+        </div>
+
+        <form onSubmit={submit} className="login-form">
+          <label>Usuario</label>
+          <input
+            type="text"
+            placeholder="Ingresa tu usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <label>Contraseña</label>
+          <input
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button className="btn-login" type="submit">
+            🗝️ Iniciar Sesión
+          </button>
+
+          {msg && <div className="login-msg">{msg}</div>}
+        </form>
+
+        <div className="login-info">
+          <p><strong>Usuarios de prueba:</strong></p>
+          <ul>
+            <li><strong>Administrador</strong> (contraseña: 123456)</li>
+            <li><strong>Guarda</strong> (contraseña: 123456)</li>
+          </ul>
+        </div>
+      </div>
     </div>
   )
 }
